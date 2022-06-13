@@ -12,6 +12,7 @@
       sizes="16x16"
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/responsive.css" />
     <link
       rel="stylesheet"
       href="./assets/font/themify-icons/themify-icons.css"
@@ -39,12 +40,15 @@
           </li>
         </ul>
         <!-- End nav -->
+        <!-- MObile menu button -->
+        <div class="mobile-menu-btn" id="mobile-menu">
+          <i class="menu-icon ti-menu"></i>
+        </div>
 
         <!-- Begin: Search button -->
         <div class="search-btn">
           <i class="ti-search search-icon"></i>
         </div>
-        <!-- End: Search button -->
       </div>
 
       <div id="slider">
@@ -73,7 +77,7 @@
             ea commodo consequat.
           </p>
           <div class="row members-list">
-            <div class="col col-3 member-item text-center">
+            <div class="col col-3 s-col-full mt-32 text-center">
               <p class="member-name">Name</p>
               <img
                 src="./assets/img/band/member1.jpg"
@@ -81,7 +85,7 @@
                 class="member-avatar"
               />
             </div>
-            <div class="col col-3 member-item text-center">
+            <div class="col col-3 s-col-full mt-32 text-center">
               <p class="member-name">Name</p>
               <img
                 src="./assets/img/band/member1.jpg"
@@ -89,7 +93,7 @@
                 class="member-avatar"
               />
             </div>
-            <div class="col col-3 member-item text-center">
+            <div class="col col-3 s-col-full mt-32 text-center">
               <p class="member-name">Name</p>
               <img
                 src="./assets/img/band/member1.jpg"
@@ -114,7 +118,7 @@
             </ul>
             <!-- Places -->
             <div class="row places-list">
-              <div class="col col-3 place-item">
+              <div class="col col-3 s-col-full mt-16 place-item">
                 <img
                   src="./assets/img/tour-place/place1.jpg"
                   alt=""
@@ -126,11 +130,13 @@
                   <p class="place-description">
                     Praesent tincidunt sed tellus ut rutrum sed vitae justo.
                   </p>
-                  <button class="btn js-buy-ticket">Buy tickets</button>
+                  <button class="btn js-buy-ticket s-full-width">
+                    Buy tickets
+                  </button>
                 </div>
               </div>
 
-              <div class="col col-3 place-item">
+              <div class="col col-3 s-col-full mt-16 place-item">
                 <img
                   src="./assets/img/tour-place/place2.jpg"
                   alt=""
@@ -142,11 +148,13 @@
                   <p class="place-description">
                     Praesent tincidunt sed tellus ut rutrum sed vitae justo.
                   </p>
-                  <button class="btn js-buy-ticket">Buy tickets</button>
+                  <button class="btn js-buy-ticket s-full-width">
+                    Buy tickets
+                  </button>
                 </div>
               </div>
 
-              <div class="col col-3 place-item">
+              <div class="col col-3 s-col-full mt-16 place-item">
                 <img
                   src="./assets/img/tour-place/place3.jpg"
                   alt=""
@@ -158,7 +166,9 @@
                   <p class="place-description">
                     Praesent tincidunt sed tellus ut rutrum sed vitae justo.
                   </p>
-                  <button class="btn js-buy-ticket">Buy tickets</button>
+                  <button class="btn js-buy-ticket s-full-width">
+                    Buy tickets
+                  </button>
                 </div>
               </div>
             </div>
@@ -170,15 +180,21 @@
           <h2 class="section-heading">CONTACT</h2>
           <p class="section-subheading">Fan? Drop a note!</p>
           <div class="row contact-content contact-info">
-            <div class="col col-2">
+            <div class="col col-2 s-col-full">
               <p><i class="ti-location-pin"></i>Chicago, US</p>
-              <p><i class="ti-mobile"></i>Phone: +00 151515</p>
-              <p><i class="ti-email"></i>Email: mail@mail.com</p>
+              <p>
+                <i class="ti-mobile"></i>Phone:
+                <a href="tel:+00 151515">+00 151515</a>
+              </p>
+              <p>
+                <i class="ti-email"></i>Email:
+                <a href="mailTo:mail@mail.com">mail@mail.com</a>
+              </p>
             </div>
-            <div class="col col-2 contact-form">
+            <div class="col col-2 s-col-full contact-form">
               <form action="">
                 <div class="row">
-                  <div class="col col-2">
+                  <div class="col col-2 s-col-full">
                     <input
                       type="text"
                       name=""
@@ -188,7 +204,7 @@
                       required
                     />
                   </div>
-                  <div class="col col-2">
+                  <div class="col col-2 s-col-full s-mt-8">
                     <input
                       type="email"
                       name=""
@@ -212,7 +228,7 @@
                   </div>
                 </div>
                 <input
-                  class="mt-16 btn pull-right"
+                  class="mt-16 btn pull-right s-full-width"
                   type="submit"
                   value="SEND"
                 />
@@ -308,6 +324,38 @@
       modalContainer.addEventListener("click", function (event) {
         event.stopPropagation();
       });
+    </script>
+
+    <script>
+      var header = document.getElementById("header");
+      var mobileMenu = document.getElementById("mobile-menu");
+      var headerHeight = header.clientHeight;
+
+      // Đỏng mở mobile menu
+      mobileMenu.onclick = function () {
+        var isClosed = header.clientHeight === headerHeight;
+        if (isClosed) {
+          header.style.height = "auto";
+        } else {
+          header.style.height = null;
+        }
+      };
+
+      // Tự động đóng khi chọn menu
+      var menuItems = document.querySelectorAll("#nav li a[href*='#']");
+
+      for (const item of menuItems) {
+        item.onclick = function (event) {
+          var isParentMenu =
+            this.nextElementSibling &&
+            this.nextElementSibling.classList.contains("subnav");
+          if (isParentMenu) {
+            event.preventDefault();
+          } else {
+            header.style.height = null;
+          }
+        };
+      }
     </script>
   </body>
 </html>
